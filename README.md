@@ -1245,24 +1245,19 @@ Before deploying a smart contract, you must compile it to check for errors and g
 3. Ensure your contract file is still open in the main window and click **Compile** [YourContract.sol].
 4. If there are errors, they will appear in the terminal.
 
-    <img src='./images/smart-contract-solidity-fundamentals/remix/solidity-compiler-tab.png' alt='solidity-compiler-tab' />
+ <img src='./images/smart-contract-solidity-fundamentals/remix/solidity-compiler-tab.png' alt='solidity-compiler-tab' />
+
 5. You can also compile by hitting _Cmd + S_ on your Mac keyboard or _Ctrl + S_ on Windows.
 
     - If there are no errors, the contract will compile successfully, and you’ll see a green checkmark.
+
 6. When we compile our contract, the compiler generates the ABI! To get the ABI of a contract (e.g., for verification or a front-end application) scroll down in the Solidity Compiler tab and blick the ABI button:
 
-    <img src='./images/smart-contract-solidity-fundamentals/remix/remix-abi.png' alt='remix-abi' />
+ <img src='./images/smart-contract-solidity-fundamentals/remix/remix-abi.png' alt='remix-abi' />
 
 #### Connecting to MetaMask
 
 To deploy a contract on a real blockchain (e.g., Ethereum Mainnet, Sepolia, or Polygon), you need to connect Remix to MetaMask.
-
-
-
-
-
-
-
 
 1. Open MetaMask and make sure you are on the desired network.
 2. Go to the Deploy & Run Transactions panel in Remix.
@@ -1278,11 +1273,12 @@ Once compiled, a smart contract can be deployed on a local blockchain (e.g., Rem
 1. Open the Deploy & Run Transactions panel.
 2. Select a deployment environment (e.g., Remix VM for testing or Injected Provider - MetaMask for live networks).
 
-    <img src='./images/smart-contract-solidity-fundamentals/remix/metamask-environment.png' alt='metamask-environment' />
+ <img src='./images/smart-contract-solidity-fundamentals/remix/metamask-environment.png' alt='metamask-environment' />
+
 3. Choose the correct contract from the dropdown.
 4. Click Deploy and confirm the transaction in MetaMask to deploy your contract.
 
-    <img src='./images/smart-contract-solidity-fundamentals/remix/deploy.png' alt='deploy' />
+ <img src='./images/smart-contract-solidity-fundamentals/remix/deploy.png' alt='deploy' />
 
 #### Pinning Deployed Smart Contracts
 
@@ -1307,3 +1303,178 @@ Once deployed, you can interact directly with your smart contract from Remix.
 5. View results in the Remix terminal.
 
 <img src='./images/smart-contract-solidity-fundamentals/remix/remix-interact.png' alt='remix-interact' />
+
+### Writing an ERC20 Token Contract
+
+[ERC-20](https://eips.ethereum.org/EIPS/eip-20) is a technical standard for fungible tokens on the Ethereum blockchain. "ERC" stands for "Ethereum Request for Comment," the naming convention for Ethereum improvement proposals. The "20" refers to the proposal number that created this standard. An ERC-20 token is a cryptocurrency that follows specific rules defined in this standard, including functions for transferring tokens, checking balances, and approving spending by third parties. These standardized functions ensure that ERC-20 tokens work consistently across the Ethereum ecosystem, allowing them to be easily exchanged, stored in wallets, and traded on decentralized exchanges. Popular examples include USDT (Tether), USDC, DAI, and many other cryptocurrencies that operate on Ethereum.
+
+#### Writing a Simple ERC20 Token
+
+1.  Create a new Workspace in Remix:
+
+    -   At the top of the File Explorer panel, click on the Workspaces actions button (the burger icon)
+    -   Select Create blank to create a new workspace.
+    -   Give a name for your workspace. In this example, we will use the name "CLF".
+    -   Hit Ok
+
+    <img src='./images/smart-contract-solidity-fundamentals/erc-20/create-blank-workspace.png' alt='create-blank-workspace' />
+
+2.  Create a new folder:
+
+    -   Name the folder contracts
+    -   Right-click in the file explorer sidebar and click New Folder
+
+3.  Create a new file:
+
+    -   Right-click on the contracts folder and click New file
+    -   Name the file MyERC20.sol
+
+    <img src='./images/smart-contract-solidity-fundamentals/erc-20/file-explorer.png' alt='file-explorer' />
+
+4.  Write the code!
+
+    -   Copy and Paste the following token contract code: You could also create your token using the Openzeppelin Wizard.
+
+        ```solidity
+        // SPDX-License-Identifier: MIT
+        pragma solidity ^0.8.26;
+
+        import { ERC20 } from "@openzeppelin/contracts@5.2.0/token/ERC20/ERC20.sol";
+
+        contract MyERC20 is ERC20 {
+            constructor() ERC20("My Cyfrin CLF Token", "CLF") {}
+
+            function mint(address to, uint256 amount) public {
+                _mint(to, amount);
+            }
+        }
+        ```
+
+    -   Here, we have inherited the _ERC20_ smart contract from OpenZeppelin by importing it and then inheriting it using the is keyword.
+
+    -   Then, in the _MyERC20_ constructor, we have invoked the parent _ERC20_ constructor:
+
+        ```solidity
+        constructor() ERC20("My Cyfrin CLF Token", "CLF") {}
+        ```
+
+    -   Finally, we created a way to create a supply of tokens by adding a public _mint_ function:
+
+        ```solidity
+        function mint(address to, uint256 amount) public {
+            _mint(to, amount);
+        }
+        ```
+
+#### Adding Access Control
+
+We can add access control to smart contracts using **modifiers**. We also can use dependencies, including OpenZeppelin.
+
+We have written a simple token smart contract called _MyERC20_. This contract can create new tokens via the _mint_ function. However, currently, anyone can call this function and mint tokens (for free!). Let's change this.
+
+Let's add the ability to give roles to certain addresses to give them permission to mint tokens.
+
+#### Adding Access Control Using OpenZeppelin
+
+To add access control to our ERC-20 token contract, we will use OpenZeppelin's AccessControl smart contract. We need to import this contract and then inherit from it.
+
+Then, we can use the state variables, functions, and modifiers declared inside the AccessControl smart contract from within our ERC-20 contract.
+
+OpenZeppelin's AccessControl smart contract provides the ability to create [Roles](https://docs.openzeppelin.com/contracts/2.x/api/access#Roles).
+
+-   Each new role created needs a role identifier used to grant, revoke, and check if an account has a role.
+-   We will create a single role that enables the addresses with this role to mint tokens.
+-   This _role identifier_ is a _bytes32 constant_ variable. By convention, this is usually a hashed string of the role name (with the string in capitals since this is a constant):
+
+    ```solidity
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    ```
+
+-   This role identitifier can now be passed to the functions in `AccessControl` to grant roles with the `AccessControl::grantRole` function, check whether an address has a role with the `AccessControl::hasRole` function, and revoke a role using the `AccessControl::revokeRole` function by passing in the role identifier e.g. `MINTER_ROLE` and the required address to grant/check/revoke the role for.
+
+#### Adding a Minter Role to a Token Contract
+
+1.  Inherit the AccessControl contract:
+
+    ```solidity
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.19;
+
+    import { ERC20 } from "@openzeppelin/contracts@4.6.0/token/ERC20/ERC20.sol";
+    import { AccessControl } from "@openzeppelin/contracts@4.6.0/access/AccessControl.sol";
+
+    contract MyERC20 is ERC20, AccessControl {
+        constructor() ERC20("My Cyfrin CLF Token", "CLF") {}
+
+        function mint(address to, uint256 amount) public {
+        _mint(to, amount);
+        }
+    }
+    ```
+
+2.  Create a bytes32 constant state variable containing the hashed name of the role–the role identifier:
+
+    ```solidity
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.19;
+
+    import { ERC20 } from "@openzeppelin/contracts@4.6.0/token/ERC20/ERC20.sol";
+    import { AccessControl } from "@openzeppelin/contracts@4.6.0/access/AccessControl.sol";
+
+    contract MyERC20 is ERC20, AccessControl {
+        bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+
+        constructor() ERC20("My Cyfrin CLF Token", "CLF") {}
+
+        function mint(address to, uint256 amount) public {
+            _mint(to, amount);
+        }
+    }
+    ```
+
+3.  Now, we can add the onlyRole modifier from the AccessControl contract to our mint function (since our token contract is inheriting this contract) to add a check that the msg.sender has the role that we pass to the modifier.
+
+    ```solidity
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.19;
+
+    import { ERC20 } from "@openzeppelin/contracts@4.6.0/token/ERC20/ERC20.sol";
+    import { AccessControl } from "@openzeppelin/contracts@4.6.0/access/AccessControl.sol";
+
+    contract MyERC20 is ERC20, AccessControl {
+        bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+
+        constructor() ERC20("My Cyfrin CLF Token", "CLF") {}
+
+        function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
+            _mint(to, amount);
+        }
+    }
+    ```
+
+Only addresses with the `MINTER_ROLE` can call the mint function.
+
+However, we do not have a way to give addresses this `MINTER_ROLE`. To do this, we need another role that can grant roles to other addresses. OpenZeppelin's `AccessControl` contract has a role that does this already, called the `DEFAULT_ADMIN` role.
+
+Let's grant this role to the deployer in the constructor. When an address deploys a smart contract, it automatically calls the constructor. Therefore, the deployer is the msg.sender in the context of the constructor.
+
+Let's grant them the `DEFAULT_ADMIN` role and while we are at it, also the `MINTER_ROLE` so they can mint tokens. We can do this by calling the `_grantRole` function, which takes the role and the address to grant the role to:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+​
+import { ERC20 } from "@openzeppelin/contracts@4.6.0/token/ERC20/ERC20.sol";
+import { AccessControl } from "@openzeppelin/contracts@4.6.0/access/AccessControl.sol";
+​
+contract MyERC20 is ERC20, AccessControl {
+   bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+​
+    constructor() ERC20("My Cyfrin CLF Token", "CLF") {}
+​
+    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
+        _mint(to, amount);
+    }
+}
+```
+
