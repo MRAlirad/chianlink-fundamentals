@@ -1549,16 +1549,45 @@ You will know if your contract has been successfully deployed if:
 If you deployed your contract on a testnet, you can add your token to MetaMask by following these steps:
 
 1. Copy the token contract address. In Remix, you can find this address in the Deployed Contracts section.
-
-    <img src='./images/smart-contract-solidity-fundamentals/erc-20/copy-address.png' alt='copy-address' />
+   <img src='./images/smart-contract-solidity-fundamentals/erc-20/copy-address.png' alt='copy-address' />
 
 2. Open your MetaMask wallet and click on the Tokens Tab. Hit the three vertical dots icon on the right hand side and click Import tokens.
-
-    <img src='./images/smart-contract-solidity-fundamentals/erc-20/token-tab.png' alt='token-tab' />
+   <img src='./images/smart-contract-solidity-fundamentals/erc-20/token-tab.png' alt='token-tab' />
 
 3. Enter the token contract address. MetaMask will automatically detect your token and its related information since it follows the ERC-20 standard.
 4. Check if the information is correct (Address, Token Symbol, and Decimals).
-
-    <img src='./images/smart-contract-solidity-fundamentals/erc-20/import-token.png' alt='import-token' />
+   <img src='./images/smart-contract-solidity-fundamentals/erc-20/import-token.png' alt='import-token' />
 
 5. Click Next to confirm the information. Click Import to import your token to MetaMask. This allows you to view your balance and send tokens to others using the MetaMask UI.
+
+### Interacting with a Contract - Minting Tokens
+
+We have not yet minted any tokens, which means currently the total available supply of our token is `0` - no tokens currently exist! To increase the supply of tokens, we have to call the function `mint` from our contract:
+
+-   Go to the **Deploy & Run Transactions** tab.
+-   Find your token and expand the tab to see the contract's functions.
+
+    <img src='./images/smart-contract-solidity-fundamentals/mont-token/functions-on-contract.png' alt='functions-on-contract' />
+
+-   Find the function `mint` and expand it to check the parameters.
+
+    -   `to`: The address receiving the minted tokens. We will create `100` tokens by setting the amount value as `100000000000000000000`. This is because our Token has `18` decimals.
+    -   amount: The amount to mint.
+
+        <img src='./images/smart-contract-solidity-fundamentals/mont-token/transact.png' alt='transact' />
+
+-   To send the transaction, click on the transact button and confirm the transaction in your Metamask wallet.
+-   Now, you can check to see if your balance has increased by calling balanceOf and passing the address you minted the tokens to.
+-   You can also check your balance in MetaMask by heading to the Tokens tab since we added our token in the previous lesson.
+
+#### Allowance and Token Approvals
+
+Token approvals enable another address to spend another address's tokens. This feature is commonly used in DeFi applications that need to transfer ERC20 tokens from your wallet to another wallet or contract via another intermediary smart contract.
+
+To use this feature, you can call the `approve` function, specifying the address that will spend your tokens and the amount they are allowed to spend.
+
+<img src='./images/smart-contract-solidity-fundamentals/mont-token/approve.png' alt='approve' />
+
+You can always verify if a contract has permission to spend your tokens by calling the allowance function.
+
+<img src='./images/smart-contract-solidity-fundamentals/mont-token/allowance.png' alt='approve' />
