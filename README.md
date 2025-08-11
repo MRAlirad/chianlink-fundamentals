@@ -1567,14 +1567,14 @@ We have not yet minted any tokens, which means currently the total available sup
 -   Go to the **Deploy & Run Transactions** tab.
 -   Find your token and expand the tab to see the contract's functions.
 
-    <img src='./images/smart-contract-solidity-fundamentals/mont-token/functions-on-contract.png' alt='functions-on-contract' />
+    <img src='./images/smart-contract-solidity-fundamentals/mint-token/functions-on-contract.png' alt='functions-on-contract' />
 
 -   Find the function `mint` and expand it to check the parameters.
 
     -   `to`: The address receiving the minted tokens. We will create `100` tokens by setting the amount value as `100000000000000000000`. This is because our Token has `18` decimals.
     -   amount: The amount to mint.
 
-        <img src='./images/smart-contract-solidity-fundamentals/mont-token/transact.png' alt='transact' />
+        <img src='./images/smart-contract-solidity-fundamentals/mint-token/transact.png' alt='transact' />
 
 -   To send the transaction, click on the transact button and confirm the transaction in your Metamask wallet.
 -   Now, you can check to see if your balance has increased by calling balanceOf and passing the address you minted the tokens to.
@@ -1586,8 +1586,33 @@ Token approvals enable another address to spend another address's tokens. This f
 
 To use this feature, you can call the `approve` function, specifying the address that will spend your tokens and the amount they are allowed to spend.
 
-<img src='./images/smart-contract-solidity-fundamentals/mont-token/approve.png' alt='approve' />
+<img src='./images/smart-contract-solidity-fundamentals/mint-token/approve.png' alt='approve' />
 
 You can always verify if a contract has permission to spend your tokens by calling the allowance function.
 
-<img src='./images/smart-contract-solidity-fundamentals/mont-token/allowance.png' alt='approve' />
+<img src='./images/smart-contract-solidity-fundamentals/mint-token/allowance.png' alt='allowance' />
+
+### Building An ERC-721 (NFT) Token
+
+The [Open Zeppelin Contracts Wizard](https://wizard.openzeppelin.com/) is an interactive smart contract generator based on OpenZeppelin Contracts.
+
+In this exercise, we will create a simple [ERC-721](https://eips.ethereum.org/EIPS/eip-721) NFT contract.
+
+When you first open the wizard, you will see an interface with options for the type of contract you want to create, including ERC-20, ERC-721, ERC-1155, Governor, and Custom.
+
+We will be selecting the ERC-721 option as this is the token standard for NFTs.
+
+On the left side, you’ll notice the Settings tab. This is where we can configure various features for our NFT. We will be setting the following:
+
+-   Name
+-   Symbol
+-   Mintable
+-   Auto-increment Ids
+
+<img src='./images/smart-contract-solidity-fundamentals/erc-721/ozw-options.png' alt='ozw-options' />
+
+You will notice that the code is automatically filled out for you as you click various options. This makes it very quick and easy to generate templates for these contracts.
+
+In the upcoming Chainlink VRF Section, you will learn how to take this knowledge and utilize Chainlink VRF to add randomness to an NFT, creating a lot more fun for your users!
+
+<img src='./images/smart-contract-solidity-fundamentals/erc-721/nft.png' alt='nft' />
