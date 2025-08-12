@@ -2048,3 +2048,24 @@ To convert the integer (with a certain level of precision) to a float, we need t
 
 Since the ETH/USD price feed’s data has `8` decimal places, we can see that the price, as per the screenshot, is $1917.96 (divide the returned value by `10^8`).
 
+## Buying Tokens from TokenShop
+
+Let's use the TokenShop contract to buy some `MyERC20` tokens.
+
+1.  Open your Metamask and click the Send button. Enter the TokenShop contract address as the To address and enter 0.001 as the amount to send 0.001 ETH to your TokenShop address.
+
+    <img src='./images/oracle-chainlink-datafeed/mint-meta-mask.png' alt='mint-meta-mask' />
+
+    Click Continue and the Confirm to send the transaction.
+
+    This will send 0.001 ETH to your TokenShop contract and trigger the receive function, which will mint tokens from the MyERC20 contract to your wallet address.
+
+2.  Once MetaMask confirms the transaction on the blockchain, you can check whether your minted tokens show in your account in two ways:
+
+    You can check your MetaMask wallet, under Tokens, to see if the Token you’ve previously added to your MetaMask has an updated balance.
+
+    <img src='./images/oracle-chainlink-datafeed/balance.png' alt='balance' />
+
+    You can also click on the MyERC20 contract in Remix. Then, check how much of your token is held by your wallet address by calling balanceOf function and passing in your address.
+
+    <img src='./images/oracle-chainlink-datafeed/balance-of.png' alt='balance-of' />
