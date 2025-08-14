@@ -2072,7 +2072,7 @@ Let's use the TokenShop contract to buy some `MyERC20` tokens.
 
 # Chainlink Automation
 
-Introduction to Automation
+# Introduction to Automation
 Chainlink Automation is a decentralized service that automatically executes smart contract functions based on predefined conditions or at specific intervals.
 
 Why do we need Automation?
