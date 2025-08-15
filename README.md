@@ -2073,9 +2073,9 @@ Let's use the TokenShop contract to buy some `MyERC20` tokens.
 # Chainlink Automation
 
 # Introduction to Automation
+
 Chainlink Automation is a decentralized service that automatically executes smart contract functions based on predefined conditions or at specific intervals.
 
-Why do we need Automation?
 Smart contracts are powerful but have a fundamental limitation: they cannot trigger their own functions. They need external stimuli to execute their code, which is where Chainlink Automation comes in.
 
 Think of your smart contract as a sophisticated machine. It can perform various tasks but needs someone to press its buttons to activate these functions. Manually monitoring conditions and triggering functions is an inefficient and unreliable way to ensure the machine is doing things in a timely manner.
