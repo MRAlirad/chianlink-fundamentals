@@ -1,12 +1,12 @@
 # ChainLink
 
-## Introduction
+# Introduction
 
 -   [chainlink](https://chain.link)
 -   [chainlink discourd](https://discord.com/invite/chainlink)
 -   [Ethereum Stack Exchange](https://ethereum.stackexchange.com/)
 
-### Major Chainlink Services
+## Major Chainlink Services
 
 -   Chainlink Data and Price Feeds
 -   Chainlink Automation
@@ -16,9 +16,9 @@
 -   Chainlink Data Feeds
 -   Chainlink Proof of Reserve
 
-## Smart Contract and Solidity Fundammentals
+# Smart Contract and Solidity Fundammentals
 
-### Solidity Programming: A Guide for Blockchain Enthusiasts
+## Solidity Programming: A Guide for Blockchain Enthusiasts
 
 [Solidity](https://soliditylang.org) is a high-level, object-oriented programming language for writing smart contracts. It is a curly-bracket language similar to C++, Python, and JavaScript. Solidity is specifically built to run on the Ethereum Virtual Machine (EVM), making it the primary language for developing decentralized applications (dApps) and blockchain-based protocols.
 
@@ -31,7 +31,7 @@ Solidity provides features such as:
 -   **Smart contract interaction**: Contracts can easily communicate with other contracts on the blockchain.
 -   **Low-level EVM access**: Advanced developers can use inline assembly for optimized performance.
 
-#### Solidity Code Structure
+### Solidity Code Structure
 
 -   **License Identifier** : specify how others can use your code with an SPDX license identifier:
     ```solidity
@@ -48,9 +48,9 @@ Solidity provides features such as:
     }
     ```
 
-#### Programming Fundamentals for Solidity
+### Programming Fundamentals for Solidity
 
-##### Variables: Storing Information
+#### Variables: Storing Information
 
 Variables are named containers that hold data values. In Solidity, each variable must have a specific type that defines what kind of data it can store, and its location (storage, memory, or calldata) determines where the data is stored.
 
@@ -90,7 +90,7 @@ State Variable Visibility :
 
 The default visibility is _internal_ if not specified.
 
-##### Constant and Immutable variables
+#### Constant and Immutable variables
 
 Solidity provides two special types of state variables that can significantly reduce gas costs and improve security:
 
@@ -150,7 +150,7 @@ Use _constant_ and _immutable_ whenever possible to:
 -   Makes contract intentions clearer
 -   Improves security by preventing accidental state changes
 
-##### Data Types: Different Kinds of Information
+#### Data Types: Different Kinds of Information
 
 Solidity has two main categories of data types: value types and reference types. Understanding this distinction is important for how data is stored and managed in your contracts.
 
@@ -248,7 +248,7 @@ The Solidity reference types include:
     bytes public dynamicData;
     ```
 
-##### Understanding Pointers and Data Location
+#### Understanding Pointers and Data Location
 
 A **pointer** is a variable that stores the memory address/location for another piece of data rather than the data itself. Think of it as a signpost pointing to where the actual data lives rather than directly containing it.
 
@@ -286,7 +286,7 @@ memoryCopy[1] = 200; // only changes the copy, not the original
 // memoryCopy is [100, 200, 3]  (modified locally)
 ```
 
-##### Storage Locations
+#### Storage Locations
 
 Understanding how Solidity handles data storage is especially important when working with reference types. These keywords specify where data is stored:
 
@@ -334,7 +334,7 @@ When working with reference types like strings, arrays, and structs:
 -   Use memory for function parameters that need to be updated.
 -   Use storage when you need to modify state variables.
 
-##### Functions: Making Things Happen
+#### Functions: Making Things Happen
 
 Functions are blocks of code that perform specific actions. They're how your contract actually does things:
 
@@ -420,7 +420,7 @@ Special Function Types:
     }
     ```
 
-##### Transaction Context and Global Variables
+#### Transaction Context and Global Variables
 
 Solidity provides access to transaction information and blockchain data through special built-in variables. These are crucial for building secure and functional smart contracts.
 
@@ -482,7 +482,7 @@ Solidity provides access to transaction information and blockchain data through 
     }
     ```
 
-##### Block Information Variables
+#### Block Information Variables
 
 -   **block.timestamp**: The current block's timestamp (seconds since Unix epoch):
 
@@ -577,7 +577,7 @@ contract TimeLockedWallet {
 }
 ```
 
-##### Control Structures: Making Decisions
+#### Control Structures: Making Decisions
 
 -   **Conditionals (if/else)**: Conditionals let your code make decisions:
 
@@ -612,7 +612,7 @@ contract TimeLockedWallet {
 >
 > Be careful with loops in Solidity because each operation costs gas, and loops with too many iterations can exceed block gas limits. This is known as a denial of service (DoS).
 
-##### Error Handling and Requirements
+#### Error Handling and Requirements
 
 -   **Require Statements**: require checks a condition and reverts the transaction if it fails. The second parameter is an error message that helps users understand what went wrong.
 
@@ -638,7 +638,7 @@ contract TimeLockedWallet {
     }
     ```
 
-##### Events: Communicating with the Outside World
+#### Events: Communicating with the Outside World
 
 Events in Solidity are like announcements that your contract makes when something important happens. Events should be emitted when the contract state is updated:
 
@@ -663,7 +663,7 @@ contract Token {
 >
 > The indexed keyword makes it easier to search for specific events later.
 
-##### Modifiers: Reusable Function Conditions
+#### Modifiers: Reusable Function Conditions
 
 Modifiers are a way to create reusable logic for your functions:
 
@@ -688,7 +688,7 @@ contract Owned {
 
 The _ in the modifier represents where the function code will be executed. For example, if the _ is before the modifier logic, the function will be executed before the modifier logic.
 
-##### Interfaces
+#### Interfaces
 
 Interfaces in Solidity act as blueprints that define what functions a contract must implement without specifying how those functions work. Interfaces cannot contain function implementations, state variables, constructors, or inheritance from other contracts. They can only declare function signatures (name and input). When a contract implements an interface using the "is" keyword, it must include all the functions defined in that interface with matching signatures.
 
@@ -722,7 +722,7 @@ contract PaymentProcessor is IPayable {
 
 This standardization makes interfaces particularly useful for interacting with unknown contracts—you only need to know what functions you can call, not how they're implemented, enabling different contracts to communicate consistently and predictably. It tells calling contracts what functions are available on another contract and how to call those functions.
 
-#### Programming Best Practices for Solidity
+### Programming Best Practices for Solidity
 
 1. Keep it Simple: Complex code is harder to secure
 2. Check conditions before changing state: Validate all inputs with require or custom errors
@@ -734,13 +734,13 @@ This standardization makes interfaces particularly useful for interacting with u
     - Private/internal state variables: prefix with \_ (like \_owner)
 6. Be aware of gas costs: Every operation costs money in the form of gas
 
-#### What Is ABI (Application Binary Interface)?
+### What Is ABI (Application Binary Interface)?
 
 The ABI is like a smart contract's instruction manual that tells applications exactly how to talk to your contract on the blockchain.
 
 It describes, using structured data, exactly what functions and data types are available for use in the contract and how to “call” or use them.
 
-##### Why do we need ABIs?
+#### Why do we need ABIs?
 
 Imagine you have a smart contract deployed on Ethereum. Your contract might have functions like transfer, approve, or getBalance. But how does a website or another application know:
 
@@ -750,7 +750,7 @@ Imagine you have a smart contract deployed on Ethereum. Your contract might have
 
 This is where the ABI comes in! It bridges the gap between your human-readable smart contract code and the binary data that the blockchain understands.
 
-##### Purpose of the ABI
+#### Purpose of the ABI
 
 The ABI serves as a standardized way to:
 
@@ -761,7 +761,7 @@ The ABI serves as a standardized way to:
 
 Think of the ABI as a contract's "API documentation" but in a machine-readable format.
 
-##### ABI Format
+#### ABI Format
 
 The ABI is a JSON array that describes everything publically visible on a contract.
 
@@ -798,7 +798,7 @@ When you compile this contract, you will get the following ABI in JSON format:
 
 The ABI tells you that there is a function named _add_ which takes two numbers (of type _uint256_) and returns a number.
 
-##### Using ABI in Practice
+#### Using ABI in Practice
 
 When you deploy a contract, you'll need its ABI to interact with it later.
 
@@ -810,7 +810,7 @@ const contract = new ethers.Contract(contractAddress, contractABI, provider); //
 await contract.deposit(100); // Calls the deposit function
 ```
 
-### Smart Contract Libraries and Inheritance
+## Smart Contract Libraries and Inheritance
 
 Libraries and Inheritance concepts allow you to reuse code and use external dependencies, making your contracts cleaner, more secure, and cheaper to deploy.
 
@@ -821,7 +821,7 @@ When to Use Each
 | Libraries   | Utility functions and operations | Deploy once, use in many contracts | Cannot store state variables                |
 | Inheritance | Extending existing contracts     | Build on top of established code   | Can create complexity with multiple parents |
 
-#### Smart Contract Libraries
+### Smart Contract Libraries
 
 Libraries are reusable pieces of code that you can share across multiple contracts. Think of them as toolboxes containing helpful functions that your contracts can use.
 
@@ -866,18 +866,18 @@ contract Calculator {
 }
 ```
 
-##### Benefits of Libraries
+#### Benefits of Libraries
 
 -   Write Once, Use Everywhere: Define code in one place and use it in multiple contracts
 -   Gas Savings: Libraries with internal functions get embedded in your contract's bytecode, while external library functions are deployed separately and can be reused by many contracts
 -   No State Variables: Libraries cannot have state variables, making them perfect for pure utility functions
 
-##### Types of Libraries
+#### Types of Libraries
 
 1. Embedded Libraries: Use internal functions that get copied into your contract's code
 2. Linked Libraries: Use external and public functions. These functions don't get copied into your contract's bytecode - instead, your contract makes calls to the deployed library.
 
-#### Contract Inheritance
+### Contract Inheritance
 
 Inheritance lets one contract build upon another. Think of it like building with blocks—you start with a foundation and add more features.
 
@@ -913,7 +913,7 @@ contract GoldToken is BaseToken {
 
 In this example, GoldToken inherits all features from BaseToken and adds a new function.
 
-#### Function Overriding
+### Function Overriding
 
 Sometimes, you want to modify behavior from a parent contract. This is where function overriding comes in.
 
@@ -941,7 +941,7 @@ contract CustomToken is BaseToken {
 }
 ```
 
-##### Using _super_ to Call Parent Functions
+#### Using _super_ to Call Parent Functions
 
 Sometimes, you want to extend a function rather than completely replace it:
 
@@ -955,7 +955,7 @@ contract ExtendedToken is BaseToken {
 }
 ```
 
-##### Multiple Inheritance
+#### Multiple Inheritance
 
 Solidity allows a contract to inherit from multiple parents, but this requires careful handling.
 
@@ -1022,7 +1022,7 @@ contract TokenY is BaseA, BaseB {
 }
 ```
 
-#### Using OpenZeppelin Contracts
+### Using OpenZeppelin Contracts
 
 One of the most common uses of inheritance is extending standardized contracts from dependencies like [OpenZeppelin](https://www.openzeppelin.com/):
 
@@ -1071,7 +1071,7 @@ contract FeeToken is ERC20 {
 }
 ```
 
-##### OpenZeppelin Contracts Wizard
+#### OpenZeppelin Contracts Wizard
 
 The [OpenZeppelin Contract Wizard](https://wizard.openzeppelin.com/) is a helpful tool that generates customized smart contracts with just a few clicks. It's perfect for:
 
@@ -1082,7 +1082,7 @@ The [OpenZeppelin Contract Wizard](https://wizard.openzeppelin.com/) is a helpfu
 
 The wizard generates production-ready code that you can customize further.
 
-#### You can import code from various sources:
+### You can import code from various sources:
 
 ```solidity
 // Import from npm package
@@ -1095,7 +1095,7 @@ import {ERC721, IERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./MyContract.sol";
 ```
 
-#### Key Takeaways
+### Key Takeaways
 
 -   Libraries are great for utility functions and can be used across many contracts.
 -   Inheritance lets you build on existing contracts and extend their functionality
@@ -1104,20 +1104,20 @@ import "./MyContract.sol";
     -   With multiple inheritance, the order of parent contracts matters
     -   OpenZeppelin provides battle-tested contracts you can extend
 
-#### Best Practices
+### Best Practices
 
 -   Keep it Simple: Avoid deep inheritance chains that are hard to follow
 -   Document Function Overrides: Clearly comment what you're changing and why
 -   Be Careful with Multiple Inheritance: It can create unexpected behavior if not managed properly
 -   Reuse Trusted Code: Whenever possible, build on well-audited contracts like those from OpenZeppelin
 
-### Testnet Funds
+## Testnet Funds
 
 We will use Chainlink's services in smart contracts. We will deploy and interact with these contracts on testnets. Usually, this will be Sepolia, but in some instances, we will also use Base Sepolia.
 
 Let's walk through how to get some testnet LINK, how to add LINK to MetaMask and how to send your tokens to another address
 
-#### Adding LINK to Metamask
+### Adding LINK to Metamask
 
 -   Head to the [Chainlink documentation](https://docs.chain.link/resources/link-token-contracts) and scroll down to the chain you want to use LINK on. E.g. [Sepolia Testnet](https://docs.chain.link/resources/link-token-contracts#sepolia-testnet)
 -   Click the **Add to wallet** button to import the LINK token to NetaMask. Note that this will only add the token for that secific network. This will need to be repeated for all networks you intend to use LINK tokens.
@@ -1128,7 +1128,7 @@ Let's walk through how to get some testnet LINK, how to add LINK to MetaMask and
 
     <img src='./images/smart-contract-solidity-fundamentals/testnet-funds/add-token.png' alt='add-token' />
 
-#### Using a LINK faucet
+### Using a LINK faucet
 
 To obtain testnet LINK, head to the [Chainlink Faucet](https://faucets.chain.link/) page. Here, you will find a list of all supported networks.
 
@@ -1143,7 +1143,7 @@ Click the Link button at the top right, select the network(s) you want to get LI
 
     <img src='./images/smart-contract-solidity-fundamentals/testnet-funds/link-metamask.png' alt='link-metamask' />
 
-#### Adding a token to MetaMask
+### Adding a token to MetaMask
 
 LINK was easy to add to MetaMask since Chainlink included that cheeky **Add to wallet** button. But how do we add other tokens, such as USDC to MetaMask?
 
@@ -1165,7 +1165,7 @@ LINK was easy to add to MetaMask since Chainlink included that cheeky **Add to w
 
 -   Click **Next** to confirm the information. Click Import to import your token to MetaMask. This lets you view your balance and send tokens to others using the MetaMask UI.
 
-#### Sending tokens to another address
+### Sending tokens to another address
 
 -   Click on the **Tokens** tab, then click the token you want to send (you need to have imported it already), e.g., the LINK token.
 
@@ -1187,11 +1187,11 @@ LINK was easy to add to MetaMask since Chainlink included that cheeky **Add to w
 
     <img src='./images/smart-contract-solidity-fundamentals/testnet-funds/confirm-transaction.png' alt='confirm-transaction' />
 
-### Introduction To Remix
+## Introduction To Remix
 
 [Remix](https://remix.ethereum.org/) is an online Integrated Development Environment (IDE) specifically designed for smart contract development. It provides an easy-to-use interface for writing, compiling, deploying, and debugging Solidity smart contracts. Remix is widely used because of its simplicity, built-in tools, and browser-based functionality, allowing you to get started quickly without installing additional software.
 
-#### Key Features of Remix:
+### Key Features of Remix:
 
 -   File Explorer: Manage your contract files and projects.
 -   Solidity compiler: Compile and check smart contracts for errors.
@@ -1199,7 +1199,7 @@ LINK was easy to add to MetaMask since Chainlink included that cheeky **Add to w
 -   Debugger: Step through transactions to debug execution.
 -   Plugin System: Extend Remix’s functionality with additional tools.
 
-#### Navigating Remix
+### Navigating Remix
 
 -   File Explorer (left panel): Manage your workspaces, create new files, and organize contracts.
 -   Editor (center panel): Write and modify Solidity smart contracts.
@@ -1209,7 +1209,7 @@ LINK was easy to add to MetaMask since Chainlink included that cheeky **Add to w
 
 <img src='./images/smart-contract-solidity-fundamentals/remix/remix.png' alt='remix' />
 
-#### Creating Workspaces, Folders, and Files
+### Creating Workspaces, Folders, and Files
 
 Remix allows you to create different workspaces to organize your projects. This allows you to keep related files grouped together. A bit like a GitHub repository or a project folder on your comoputer.
 
@@ -1236,7 +1236,7 @@ Remix allows you to create different workspaces to organize your projects. This 
 
 4. Write the code in your new file!
 
-#### Compiling Smart Contracts
+### Compiling Smart Contracts
 
 Before deploying a smart contract, you must compile it to check for errors and generate the necessary bytecode.
 
@@ -1255,7 +1255,7 @@ Before deploying a smart contract, you must compile it to check for errors and g
 
  <img src='./images/smart-contract-solidity-fundamentals/remix/remix-abi.png' alt='remix-abi' />
 
-#### Connecting to MetaMask
+### Connecting to MetaMask
 
 To deploy a contract on a real blockchain (e.g., Ethereum Mainnet, Sepolia, or Polygon), you need to connect Remix to MetaMask.
 
@@ -1266,7 +1266,7 @@ To deploy a contract on a real blockchain (e.g., Ethereum Mainnet, Sepolia, or P
 
 <img src='./images/smart-contract-solidity-fundamentals/remix/metamask-environment.png' alt='metamask-environment' />
 
-#### Deploying Smart Contracts
+### Deploying Smart Contracts
 
 Once compiled, a smart contract can be deployed on a local blockchain (e.g., Remix VM) or a real network (e.g., Ethereum).
 
@@ -1280,19 +1280,19 @@ Once compiled, a smart contract can be deployed on a local blockchain (e.g., Rem
 
  <img src='./images/smart-contract-solidity-fundamentals/remix/deploy.png' alt='deploy' />
 
-#### Pinning Deployed Smart Contracts
+### Pinning Deployed Smart Contracts
 
 After deployment, Remix allows you to pin a deployed contract to your workspace so you can continue interacting with it even after refreshing the page. Click the pin icon to pin the deployed contract.
 
 <img src='./images/smart-contract-solidity-fundamentals/remix/pin-contract.png' alt='pin-contract' />
 
-#### The contract address
+### The contract address
 
 1. In the **Deploy & Run Transactions** panel, find the deployed contract under Deployed Contracts.
 2. Click the **copy icon** to save the contract address.
 3. If needed, use the **At Address** button to reattach the contract after a page refresh.
 
-#### Interacting with Smart Contracts
+### Interacting with Smart Contracts
 
 Once deployed, you can interact directly with your smart contract from Remix.
 
@@ -1304,11 +1304,11 @@ Once deployed, you can interact directly with your smart contract from Remix.
 
 <img src='./images/smart-contract-solidity-fundamentals/remix/remix-interact.png' alt='remix-interact' />
 
-### Writing an ERC20 Token Contract
+## Writing an ERC20 Token Contract
 
 [ERC-20](https://eips.ethereum.org/EIPS/eip-20) is a technical standard for fungible tokens on the Ethereum blockchain. "ERC" stands for "Ethereum Request for Comment," the naming convention for Ethereum improvement proposals. The "20" refers to the proposal number that created this standard. An ERC-20 token is a cryptocurrency that follows specific rules defined in this standard, including functions for transferring tokens, checking balances, and approving spending by third parties. These standardized functions ensure that ERC-20 tokens work consistently across the Ethereum ecosystem, allowing them to be easily exchanged, stored in wallets, and traded on decentralized exchanges. Popular examples include USDT (Tether), USDC, DAI, and many other cryptocurrencies that operate on Ethereum.
 
-#### Writing a Simple ERC20 Token
+### Writing a Simple ERC20 Token
 
 1.  Create a new Workspace in Remix:
 
@@ -1366,7 +1366,7 @@ Once deployed, you can interact directly with your smart contract from Remix.
         }
         ```
 
-#### Adding Access Control
+### Adding Access Control
 
 We can add access control to smart contracts using **modifiers**. We also can use dependencies, including OpenZeppelin.
 
@@ -1374,7 +1374,7 @@ We have written a simple token smart contract called _MyERC20_. This contract ca
 
 Let's add the ability to give roles to certain addresses to give them permission to mint tokens.
 
-#### Adding Access Control Using OpenZeppelin
+### Adding Access Control Using OpenZeppelin
 
 To add access control to our ERC-20 token contract, we will use OpenZeppelin's AccessControl smart contract. We need to import this contract and then inherit from it.
 
@@ -1392,7 +1392,7 @@ OpenZeppelin's AccessControl smart contract provides the ability to create [Role
 
 -   This role identitifier can now be passed to the functions in `AccessControl` to grant roles with the `AccessControl::grantRole` function, check whether an address has a role with the `AccessControl::hasRole` function, and revoke a role using the `AccessControl::revokeRole` function by passing in the role identifier e.g. `MINTER_ROLE` and the required address to grant/check/revoke the role for.
 
-#### Adding a Minter Role to a Token Contract
+### Adding a Minter Role to a Token Contract
 
 1.  Inherit the AccessControl contract:
 
@@ -1478,11 +1478,11 @@ contract MyERC20 is ERC20, AccessControl {
 }
 ```
 
-### Deploying an ERC-20 Contract
+## Deploying an ERC-20 Contract
 
 Now we have written our permissioned ERC-20 token contract, let's deploy it to a live testnet and then add that token to our MetaMask so we can see our balance and use the UI to perform token transfers.
 
-#### Compile & Deploy
+### Compile & Deploy
 
 1.  Compile your smart contract
 
@@ -1530,7 +1530,7 @@ You will know if your contract has been successfully deployed if:
 
 <img src='./images/smart-contract-solidity-fundamentals/erc-20/copy-address.png' alt='copy-address' />
 
-#### Check Total Token Supply and Balances
+### Check Total Token Supply and Balances
 
 1.  Once your contract is deployed, you can view it in the Deployed Contracts section. Here, you will find all the functions available within the contract, allowing you to interact with them directly.
 
@@ -1544,7 +1544,7 @@ You will know if your contract has been successfully deployed if:
 
     <img src='./images/smart-contract-solidity-fundamentals/erc-20/0-total-supply.png' alt='0-total-supply' />
 
-#### Adding Your Token to MetaMask
+### Adding Your Token to MetaMask
 
 If you deployed your contract on a testnet, you can add your token to MetaMask by following these steps:
 
@@ -1560,7 +1560,7 @@ If you deployed your contract on a testnet, you can add your token to MetaMask b
 
 5. Click Next to confirm the information. Click Import to import your token to MetaMask. This allows you to view your balance and send tokens to others using the MetaMask UI.
 
-### Interacting with a Contract - Minting Tokens
+## Interacting with a Contract - Minting Tokens
 
 We have not yet minted any tokens, which means currently the total available supply of our token is `0` - no tokens currently exist! To increase the supply of tokens, we have to call the function `mint` from our contract:
 
@@ -1580,7 +1580,7 @@ We have not yet minted any tokens, which means currently the total available sup
 -   Now, you can check to see if your balance has increased by calling balanceOf and passing the address you minted the tokens to.
 -   You can also check your balance in MetaMask by heading to the Tokens tab since we added our token in the previous lesson.
 
-#### Allowance and Token Approvals
+### Allowance and Token Approvals
 
 Token approvals enable another address to spend another address's tokens. This feature is commonly used in DeFi applications that need to transfer ERC20 tokens from your wallet to another wallet or contract via another intermediary smart contract.
 
@@ -1592,7 +1592,7 @@ You can always verify if a contract has permission to spend your tokens by calli
 
 <img src='./images/smart-contract-solidity-fundamentals/mint-token/allowance.png' alt='allowance' />
 
-### Building An ERC-721 (NFT) Token
+## Building An ERC-721 (NFT) Token
 
 The [Open Zeppelin Contracts Wizard](https://wizard.openzeppelin.com/) is an interactive smart contract generator based on OpenZeppelin Contracts.
 
@@ -2072,7 +2072,7 @@ Let's use the TokenShop contract to buy some `MyERC20` tokens.
 
 # Chainlink Automation
 
-# Introduction to Automation
+## Introduction to Automation
 
 Chainlink Automation is a decentralized service that automatically executes smart contract functions based on predefined conditions or at specific intervals.
 
