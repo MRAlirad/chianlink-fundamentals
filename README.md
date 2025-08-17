@@ -2116,7 +2116,7 @@ The Registry validates these reports before executing the upkeep functions.
 
 automation-architecture
 
-This architecture provides several key benefits:
+This architecture provides several key benefits
 
 Cryptographic guarantees of execution.
 
