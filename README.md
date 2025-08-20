@@ -2105,31 +2105,26 @@ Chainlink Automation supports three distinct trigger mechanisms:
 -   **Log trigger**: <br />
     These monitor blockchain events (logs) emitted by smart contracts. Chainlink Automation executes the associated function when a specified event occurs, allowing for event-driven automation.
 
-Automation Architecture
+### Automation Architecture
+
 The Chainlink Automation Network consists of specialized Automation nodes coordinated by the Automation Registry smart contract. This Registry manages upkeep registrations and compensates nodes for successful executions.
 
-Developers can register upkeeps, while node operators can register as Automation nodes. The network operates using a peer-to-peer system based on Chainlink’s OCR3 protocol.
+Developers can register upkeeps, while node operators can register as Automation nodes. The network operates using a peer-to-peer system based on Chainlink’s [OCR3 protocol](https://docs.chain.link/architecture-overview/off-chain-reporting).
 
-Automation nodes continuously scan for upkeeps that are eligible for execution.
+-   Automation nodes continuously scan for upkeeps that are eligible for execution.
+-   Nodes reach consensus on which upkeeps to perform.
+-   They generate cryptographically signed reports.
+-   The Registry validates these reports before executing the upkeep functions.
 
-Nodes reach consensus on which upkeeps to perform.
-
-They generate cryptographically signed reports.
-
-The Registry validates these reports before executing the upkeep functions.
-
-automation-architecture
+<img src='./images/chainlink-automation/automation-architecture.png' alt='automation-architecture' />
 
 This architecture provides several key benefits:
 
-Cryptographic guarantees of execution.
-
-Built-in redundancy across multiple nodes.
-
-Resistance to network congestion with sophisticated gas management.
-
-Reliable performance even during gas price spikes or blockchain reorganizations.
+-   Cryptographic guarantees of execution.
+-   Built-in redundancy across multiple nodes.
+-   Resistance to network congestion with sophisticated gas management.
+-   Reliable performance even during gas price spikes or blockchain reorganizations.
 
 The system includes internal monitoring and alerting mechanisms to maintain network health and ensure high reliability and performance.
 
-Chainlink Automation supports multiple blockchains, with details on the supported networks page. Information about the cost of using Chainlink Automation can be found on the Automation economics page.
+Chainlink Automation supports multiple blockchains, with details on the [supported networks page](https://docs.chain.link/chainlink-automation/overview/supported-networks). Information about the cost of using Chainlink Automation can be found on the [Automation economics page](https://docs.chain.link/chainlink-automation/overview/automation-economics).
