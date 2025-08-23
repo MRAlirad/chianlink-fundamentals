@@ -37,7 +37,7 @@ Solidity provides features such as:
     ```solidity
     // SPDX-License-Identifier: MIT
     ```
--   **Version Pragma** : declare which version of Solidity your code is compatible with using that _pragma_ directive:
+-   **Version Pragma** : declare which version of Solidity your code is compatible with using that `pragma` directive:
     ```solidity
     pragma solidity ^0.8.19;
     ```
@@ -88,7 +88,7 @@ State Variable Visibility :
     uint256 internal sharedSecret = 42; // Visible to this contract and child contracts
     ```
 
-The default visibility is _internal_ if not specified.
+The default visibility is `internal` if not specified.
 
 #### Constant and Immutable variables
 
@@ -105,7 +105,7 @@ contract TokenContract {
 }
 ```
 
-Key characteristics of _constant_ variables:
+Key characteristics of `constant` variables:
 
 -   Must be assigned a value when declared.
 -   Value is set at compile time.
@@ -130,7 +130,7 @@ contract TokenContract {
 }
 ```
 
-Key characteristics of _immutable_ variables:
+Key characteristics of `immutable` variables:
 
 -   Can be assigned in the constructor or at declaration
 -   Cannot be changed after construction
@@ -144,7 +144,7 @@ When to Use Each
 -   Use immutable for values that depend on deployment conditions but won't change after that (e.g., deployer address, configuration based on constructor arguments)
 -   Use regular state variables for values that need to change during the contract's lifetime
 
-Use _constant_ and _immutable_ whenever possible to:
+Use `constant` and `immutable` whenever possible to:
 
 -   Reduces gas costs
 -   Makes contract intentions clearer
@@ -192,7 +192,7 @@ The Solidity value types include:
 
     The number after uint/int (like 256) represents how many bits are used to store the number. More bits mean larger possible values. The maximum value of e.g. a uint256 is 2^256-1 and a int256 2^255-1 since it has to be able to store the sign too.
 
--   **bool (Boolean)**: _true_ or _false_ values
+-   **bool (Boolean)**: `true` or `false` values
 
     ```solidity
     bool public isComplete = false;
@@ -370,11 +370,11 @@ function add(uint256 a, uint256 b) public pure returns (uint256) {
 
 this function:
 
--   Is named _add_.
--   Takes two parameters: _a_ and _b_, both of type _uint256_.
--   Is _public_ so anyone can call it.
--   Is _pure_ which means it doesn't read or modify state.
--   Returns a _uint256_ value.
+-   Is named `add`.
+-   Takes two parameters: `a` and `b`, both of type `uint256`.
+-   Is `public` so anyone can call it.
+-   Is `pure` which means it doesn't read or modify state.
+-   Returns a `uint256` value.
 -   Adds the two input values and returns the result.
 
 Function Visibility
@@ -624,7 +624,7 @@ contract TimeLockedWallet {
     }
     ```
 
--   **Custom Errors**: For gas efficiency, you can define custom errors. This is what you should do fpr errors, rather than using the _require_ keyword:
+-   **Custom Errors**: For gas efficiency, you can define custom errors. This is what you should do fpr errors, rather than using the `require` keyword:
 
     ```solidity
     error InsufficientBalance(address user, uint256 balance, uint256 withdrawAmount);
@@ -796,7 +796,7 @@ When you compile this contract, you will get the following ABI in JSON format:
 ]
 ```
 
-The ABI tells you that there is a function named _add_ which takes two numbers (of type _uint256_) and returns a number.
+The ABI tells you that there is a function named `add` which takes two numbers (of type `uint256`) and returns a number.
 
 #### Using ABI in Practice
 
@@ -941,7 +941,7 @@ contract CustomToken is BaseToken {
 }
 ```
 
-#### Using _super_ to Call Parent Functions
+#### Using `super` to Call Parent Functions
 
 Sometimes, you want to extend a function rather than completely replace it:
 
@@ -1099,8 +1099,8 @@ import "./MyContract.sol";
 
 -   Libraries are great for utility functions and can be used across many contracts.
 -   Inheritance lets you build on existing contracts and extend their functionality
-    -   Use _virtual_ in parent contracts and _override_ in child contracts when overriding functions
-    -   The _super_ keyword lets you call parent implementations
+    -   Use `virtual` in parent contracts and `override` in child contracts when overriding functions
+    -   The `super` keyword lets you call parent implementations
     -   With multiple inheritance, the order of parent contracts matters
     -   OpenZeppelin provides battle-tested contracts you can extend
 
@@ -1225,12 +1225,12 @@ Remix allows you to create different workspaces to organize your projects. This 
 2. Create a new folder:
 
     - Right-click in the file explorer sidebar and click New Folder
-    - Name the folder _contracts_
+    - Name the folder `contracts`
 
 3. Create a new file:
 
-    - Right-click on the contr_acts folder and click New file
-    - Name the file _MyERC20.sol_
+    - Right-click on the contracts folder and click New file
+    - Name the file `MyERC20.sol`
 
     <img src='./images/smart-contract-solidity-fundamentals/remix/file-explorer.png' alt='file-explorer' />
 
@@ -1247,7 +1247,7 @@ Before deploying a smart contract, you must compile it to check for errors and g
 
  <img src='./images/smart-contract-solidity-fundamentals/remix/solidity-compiler-tab.png' alt='solidity-compiler-tab' />
 
-5. You can also compile by hitting _Cmd + S_ on your Mac keyboard or _Ctrl + S_ on Windows.
+5. You can also compile by hitting `Cmd + S` on your Mac keyboard or `Ctrl + S` on Windows.
 
     - If there are no errors, the contract will compile successfully, and you’ll see a green checkmark.
 
@@ -1350,15 +1350,15 @@ Once deployed, you can interact directly with your smart contract from Remix.
         }
         ```
 
-    -   Here, we have inherited the _ERC20_ smart contract from OpenZeppelin by importing it and then inheriting it using the is keyword.
+    -   Here, we have inherited the `ERC20` smart contract from OpenZeppelin by importing it and then inheriting it using the is keyword.
 
-    -   Then, in the _MyERC20_ constructor, we have invoked the parent _ERC20_ constructor:
+    -   Then, in the `MyERC20` constructor, we have invoked the parent `ERC20` constructor:
 
         ```solidity
         constructor() ERC20("My Cyfrin CLF Token", "CLF") {}
         ```
 
-    -   Finally, we created a way to create a supply of tokens by adding a public _mint_ function:
+    -   Finally, we created a way to create a supply of tokens by adding a public `mint` function:
 
         ```solidity
         function mint(address to, uint256 amount) public {
@@ -1370,7 +1370,7 @@ Once deployed, you can interact directly with your smart contract from Remix.
 
 We can add access control to smart contracts using **modifiers**. We also can use dependencies, including OpenZeppelin.
 
-We have written a simple token smart contract called _MyERC20_. This contract can create new tokens via the _mint_ function. However, currently, anyone can call this function and mint tokens (for free!). Let's change this.
+We have written a simple token smart contract called `MyERC20`. This contract can create new tokens via the `mint` function. However, currently, anyone can call this function and mint tokens (for free!). Let's change this.
 
 Let's add the ability to give roles to certain addresses to give them permission to mint tokens.
 
@@ -1384,7 +1384,7 @@ OpenZeppelin's AccessControl smart contract provides the ability to create [Role
 
 -   Each new role created needs a role identifier used to grant, revoke, and check if an account has a role.
 -   We will create a single role that enables the addresses with this role to mint tokens.
--   This _role identifier_ is a _bytes32 constant_ variable. By convention, this is usually a hashed string of the role name (with the string in capitals since this is a constant):
+-   This `role identifier` is a `bytes32 constant` variable. By convention, this is usually a hashed string of the role name (with the string in capitals since this is a constant):
 
     ```solidity
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
@@ -2293,3 +2293,91 @@ If you head back to Etherscan, you can see the value of `counter` has increased.
 > Note: <br />
 > You can pause your automation from the Automation app UI or withdraw your LINK funds from it if you want it to stop running. You can always resume it later if necessary or create a new one for future projects.
 
+## Custom Logic Automation
+
+Custom logic upkeeps allow you to define specialized conditions directly within your smart contract to determine precisely when the upkeep should be executed. Unlike simpler trigger mechanisms, custom logic gives you complete control over when your functions run.
+
+In this example, we'll create a time-based trigger for a counter function. instead of a standard time-based upkeep trigger, like we used for the `TimeBased` contract, we'll implement it using custom logic trigger to demonstrate this approach's flexibility in a contract called `CustomLogic`.
+
+At the heart of custom logic automation is a simple boolean return value. Your contract will include a function called `checkUpkeep` that evaluates conditions and returns either `true` or `false`. When this function returns true, Chainlink Automation executes your designated upkeep function called `performUpkeep`. These functions form the required `AutomationCompatibleInterface` custom logic compatible contracts must implement.
+
+While we're using time as our trigger condition in this example for simplicity, custom logic can evaluate any on-chain condition or combination of conditions you can express in Solidity.
+
+### Creating the Custom Trigger contract
+
+Create a new file in the `contracts` folder in Remix (again, in the "Automation" workspace) named `CustomLogic.sol` with the following content from the [course code repo](https://github.com/ciaranightingale/chainlink-fundamentals-code/blob/main/automation/CustomLogic.sol).
+
+#### Code walkthrough
+
+-   The `constructor`: This will enable us to set an interval for updates on deployment via the constructor parameter `_updateInterval`. This interval is in seconds. When we deploy this contract, we will set the interval to `300` or `five minutes`. It also sets the `lastUpdatedTimestamp` to the `block.timestamp`, which is the block time at deployment.
+
+-   For the contract to be compatible with custom logic Automation, the `AutomationCompatibleInterface` must be inherited. It requires two functions to be implemented:
+
+    -   `checkUpkeep`: This function should contain the logic to determine if the contract is ready for upkeep. If it is, it will return `true`. Otherwise, it will return `false`.
+
+    -   `performUpkeep`: This is the function run by Automation to execute the upkeep. It contains the logic that is run when the upkeep is performed.
+
+### Deploying & verifying the CustomLogic contract
+
+To deploy the contract to Sepolia, follow the steps in the previous lessons. There is a difference this time: We need a constructor parameter! Remember to pin the deployed contract instance to the workspace to ensure it persists if Remix is reloaded.
+
+Set the \_updateInterval constructor parameter to 300 (this equals 5 minutes), and click the Deploy button.
+
+custom-automation-deploy
+
+Once the contract is deployed, you can verify it on Etherscan using the process outlined in the time-based automation lesson.
+
+Flattening files
+We imported contracts, which means you’ll need to flatten the file first (put the code all into a single file) and then paste that code instead of just the CustomLogic code into the verification process. You can do this in the File Explorer by right-clicking the CustomLogic.sol file and clicking Flatten.
+
+flatten
+
+Now you can copy the flattened code in CustomLogic_flattened.sol and use it for verification.
+
+flattened
+
+checkUpkeep
+Once five minutes have passed, checkUpkeep will return true. This indicates that the automation system will run performUpkeep once we have setup a custom logic upkeep.
+
+Note: To manually call the checkUpkeep and performUpkeep functions, pass an empty bytes array as the function parameter:
+
+empty-bytes
+
+Register Custom Logic Upkeep
+With the contract deployed, we can head to the Chainlink Automation app and create the automation job to enable automatic counting.
+
+This time, we’ll select Custom Logic and enter the address of our deployed contract, then click Next.
+
+custom-logic-trigger
+
+Fill in the Upkeep details:
+
+Upkeep name: A name for the upkeep visible on the Automation dashboard, e.g. "TimeBased Counter"
+
+Admin Address: This will be your connected wallet by default, but you can change which address will be the admin for the upkeep here.
+
+Gas limit: The maximum amount of gas your selected function for upkeep will need to use. By default, this is 500_000.
+
+Starting balance: A starting balance of LINK is used to pay for Chainlink Automation. In this example, 5 LINK will be sufficient.
+
+The Project information is optional; we will leave it blank.
+
+custom-logic-options
+
+Confirm the registration request and sign the message to verify your ownership of the upkeep.
+
+The upkeep page provides a quick overview that shows the upkeep status, such as when it was last run, the current balance of LINK, and how much LINK has been spent.
+
+custom-logic-overview
+
+The details section gives you all the information about the upkeep, such as when it will run next and what function it will call.
+
+custom-logic-details
+
+The history section shows the history of the upkeep, including every time it’s run. Once five minutes have passed, you should be able to refresh the page and see that the upkeep has been completed.
+
+custom-logic-history
+
+If you head back to Remix, you can see the value of counter has increased after 5 minutes has passed. The upkeep will continue until it runs out of LINK or is paused.
+
+counter-increased-custom
