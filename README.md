@@ -2321,63 +2321,59 @@ Create a new file in the `contracts` folder in Remix (again, in the "Automation"
 
 To deploy the contract to Sepolia, follow the steps in the previous lessons. There is a difference this time: We need a constructor parameter! Remember to pin the deployed contract instance to the workspace to ensure it persists if Remix is reloaded.
 
-Set the \_updateInterval constructor parameter to 300 (this equals 5 minutes), and click the Deploy button.
+-   Set the `_updateInterval` constructor parameter to `300` (this equals 5 minutes), and click the Deploy button. <br />
+    <img src='./images/chainlink-automation/custom-automation-deploy.png' alt='custom-automation-deploy' />
 
-custom-automation-deploy
+-   Once the contract is deployed, you can **verify** it on [Etherscan](https://sepolia.etherscan.io/) using the process outlined in the time-based automation lesson.
 
-Once the contract is deployed, you can verify it on Etherscan using the process outlined in the time-based automation lesson.
+#### Flattening files
 
-Flattening files
-We imported contracts, which means you’ll need to flatten the file first (put the code all into a single file) and then paste that code instead of just the CustomLogic code into the verification process. You can do this in the File Explorer by right-clicking the CustomLogic.sol file and clicking Flatten.
+We imported contracts, which means you’ll need to flatten the file first (put the code all into a single file) and then paste that code instead of just the `CustomLogic` code into the verification process. You can do this in the File Explorer by right-clicking the `CustomLogic.sol` file and clicking Flatten.
 
-flatten
+<img src='./images/chainlink-automation/flatten.png' alt='flatten' />
 
-Now you can copy the flattened code in CustomLogic_flattened.sol and use it for verification.
+Now you can copy the flattened code in `CustomLogic_flattened.sol` and use it for verification.
 
-flattened
+<img src='./images/chainlink-automation/flattened.png' alt='flattened' />
 
-checkUpkeep
-Once five minutes have passed, checkUpkeep will return true. This indicates that the automation system will run performUpkeep once we have setup a custom logic upkeep.
+### checkUpkeep
 
-Note: To manually call the checkUpkeep and performUpkeep functions, pass an empty bytes array as the function parameter:
+Once five minutes have passed, `checkUpkeep` will return `true`. This indicates that the automation system will run `performUpkeep` once we have setup a custom logic upkeep.
 
-empty-bytes
+> Note: <br />
+> To manually call the checkUpkeep and performUpkeep functions, pass an empty bytes array as the function parameter:
 
-Register Custom Logic Upkeep
-With the contract deployed, we can head to the Chainlink Automation app and create the automation job to enable automatic counting.
+<img src='./images/chainlink-automation/empty-bytes.png' alt='empty-bytes' />
 
-This time, we’ll select Custom Logic and enter the address of our deployed contract, then click Next.
+### Register Custom Logic Upkeep
 
-custom-logic-trigger
+With the contract deployed, we can head to the [**Chainlink Automation app**](https://automation.chain.link/) and create the automation job to enable automatic counting.
 
-Fill in the Upkeep details:
+-   This time, we’ll select **Custom Logic** and enter the address of our deployed contract, then click **Next**. <br />
+    <img src='./images/chainlink-automation/custom-logic-trigger.png' alt='custom-logic-trigger' />
 
-Upkeep name: A name for the upkeep visible on the Automation dashboard, e.g. "TimeBased Counter"
+-   Fill in the Upkeep details:
 
-Admin Address: This will be your connected wallet by default, but you can change which address will be the admin for the upkeep here.
+    -   **Upkeep name**: A name for the upkeep visible on the Automation dashboard, e.g. "**TimeBased Counter**"
+    -   **Admin Address**: This will be your connected wallet by default, but you can change which address will be the admin for the upkeep here.
+    -   **Gas limit**: The maximum amount of gas your selected function for upkeep will need to use. By default, this is `500_000`.
+    -   **Starting balance**: A starting balance of LINK is used to pay for Chainlink Automation. In this example, `5` LINK will be sufficient.
+    -   The **Project information** is optional; we will leave it blank.
 
-Gas limit: The maximum amount of gas your selected function for upkeep will need to use. By default, this is 500_000.
+    <img src='./images/chainlink-automation/custom-logic-options.png' alt='custom-logic-options' />
 
-Starting balance: A starting balance of LINK is used to pay for Chainlink Automation. In this example, 5 LINK will be sufficient.
+-   Confirm the registration request and sign the message to verify your ownership of the upkeep.
 
-The Project information is optional; we will leave it blank.
+-   The **upkeep page** provides a quick overview that shows the upkeep status, such as when it was last run, the current balance of LINK, and how much LINK has been spent. <br />
+    <img src='./images/chainlink-automation/custom-logic-overview.png' alt='custom-logic-overview' />
 
-custom-logic-options
+-   The **details section** gives you all the information about the upkeep, such as when it will run next and what function it will call. <br />
+    <img src='./images/chainlink-automation/custom-logic-details.png' alt='custom-logic-details' />
 
-Confirm the registration request and sign the message to verify your ownership of the upkeep.
+The **history section** shows the history of the upkeep, including every time it’s run. Once five minutes have passed, you should be able to refresh the page and see that the upkeep has been completed.
 
-The upkeep page provides a quick overview that shows the upkeep status, such as when it was last run, the current balance of LINK, and how much LINK has been spent.
+<img src='./images/chainlink-automation/custom-logic-history.png' alt='custom-logic-history' />
 
-custom-logic-overview
+If you head back to Remix, you can see the value of `counter` has increased after 5 minutes has passed. The upkeep will continue until it runs out of LINK or is paused.
 
-The details section gives you all the information about the upkeep, such as when it will run next and what function it will call.
-
-custom-logic-details
-
-The history section shows the history of the upkeep, including every time it’s run. Once five minutes have passed, you should be able to refresh the page and see that the upkeep has been completed.
-
-custom-logic-history
-
-If you head back to Remix, you can see the value of counter has increased after 5 minutes has passed. The upkeep will continue until it runs out of LINK or is paused.
-
-counter-increased-custom
+<img src='./images/chainlink-automation/counter-increased-custom.png' alt='counter-increased-custom' />
